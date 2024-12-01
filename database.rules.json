@@ -1,0 +1,21 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+        "favorites": {
+          ".read": "$uid === auth.uid",
+          ".write": "$uid === auth.uid",
+          "$favoriteId": {
+            ".validate": "newData.hasChildren(['name', 'coordinates']) && 
+                         newData.child('name').isString() && 
+                         newData.child('coordinates').hasChildren([0, 1]) &&
+                         newData.child('coordinates').child(0).isNumber() &&
+                         newData.child('coordinates').child(1).isNumber()"
+          }
+        }
+      }
+    }
+  }
+}
